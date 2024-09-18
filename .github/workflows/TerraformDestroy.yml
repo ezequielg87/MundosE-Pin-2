@@ -14,6 +14,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Cache Terraform state
+        uses: actions/cache@v3
+        with:
+          path: |
+            .terraform
+            terraform.tfstate
+            terraform.tfstate.backup
+          key: terraform-state-${{ github.ref }}-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            terraform-state-${{ github.ref }}-
+
       - uses: hashicorp/setup-terraform@v3
 
       - name: Verify Terraform version
@@ -21,9 +32,6 @@ jobs:
 
       - name: Terraform init
         run: terraform init -input=false
-
-      - name: Select workspace (if applicable)
-        run: terraform workspace select dev
 
       - name: Terraform validate
         run: terraform validate
