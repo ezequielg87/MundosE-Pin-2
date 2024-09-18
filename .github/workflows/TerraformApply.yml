@@ -22,7 +22,7 @@ jobs:
       run: terraform validate
 
     - name: Select workspace
-      run: terraform workspace select dev || terraform workspace new dev
+      run: terraform workspace select -or-create dev
 
     - name: Terraform plan - To validate chage before apply
       env:
