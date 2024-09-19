@@ -38,3 +38,9 @@ jobs:
 
       - name: Terraform destroy
         run: terraform destroy -auto-approve
+      
+      - name: Remove cached Terraform state files
+        run: |
+          rm -rf .terraform
+          rm -f terraform.tfstate
+          rm -f terraform.tfstate.backup
