@@ -44,3 +44,4 @@ jobs:
           rm -rf .terraform
           rm -f terraform.tfstate
           rm -f terraform.tfstate.backup
+          rm -f terraform-state-refs*
